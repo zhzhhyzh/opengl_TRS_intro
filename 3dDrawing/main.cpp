@@ -6,7 +6,12 @@
 
 #define WINDOW_TITLE "OpenGL Window"
 
-
+float tx = 0.0f; // Global variable for translation x
+float ty = 0.0f; // Global variable for translation y
+float tSpeed = 0.1;
+float r = 1; //red
+float g = 1; //green
+float b = 1; //blue
 LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	switch (msg)
@@ -17,6 +22,23 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 
 	case WM_KEYDOWN:
 		if (wParam == VK_ESCAPE) PostQuitMessage(0);
+		else if(wParam == VK_RIGHT)
+			{
+			tx += tSpeed; // Move right
+		} else if (wParam == VK_LEFT) {
+			tx -= tSpeed; // Move left
+		} else if (wParam == VK_UP) {
+			ty += tSpeed; // Move up
+		}
+		else if (wParam == VK_DOWN) {
+			ty -= tSpeed; // Move down
+		}
+		else if (wParam == 'R') { // Press the 'R' Key
+			r = 1;
+			g = 1;
+			b = 1;
+			//Reset ehite
+		}
 		break;
 
 	default:
@@ -58,9 +80,7 @@ bool initPixelFormat(HDC hdc)
 	}
 }
 //--------------------------------------------------------------------
-
-void display()
-{
+void p2Demo() {
 	//--------------------------------
 	//	OpenGL drawing
 	//--------------------------------
@@ -91,6 +111,44 @@ void display()
 	//--------------------------------
 	//	End of OpenGL drawing
 	//--------------------------------
+}
+
+void p2q1() {
+	glClearColor(0, 0, 0, 0);
+	glClear(GL_COLOR_BUFFER_BIT);
+	if (rand() % 2) {
+		r -= 0.00001;
+	}
+	else {
+		r += 0.001;
+	}
+	g -= 0.001;
+	glLoadIdentity(); // Remove all transformation
+	glTranslatef(tx, ty, 0);//Translate x and y, tx & ty are global variables
+	glBegin(GL_QUADS); //quads
+	glColor3f(r, g, b);
+		glVertex2f(-0.5, 0);
+		glVertex2f(-0.5, 0.5);
+		glVertex2f(0.5, 0.5);
+		glVertex2f(0.5, 0);
+	glEnd();
+}
+
+void p2q2() {
+
+}
+
+void p2q3() {
+
+}
+
+void p2q4() {
+
+}
+
+void display()
+{
+	p2q1();
 }
 //--------------------------------------------------------------------
 
