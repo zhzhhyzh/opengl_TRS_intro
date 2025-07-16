@@ -35,9 +35,26 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 		}
 		else if (wParam == 'R') { // Press the 'R' Key
 			r = 1;
+			g = 0;
+			b = 0;
+			//Reset white
+		}
+		else if (wParam == 'G') { // Press the 'R' Key
+			r = 0;
+			g = 1;
+			b = 0;
+			//Reset white
+		}
+		else if (wParam == 'B') { // Press the 'R' Key
+			r = 0;
+			g = 0;
+			b = 1;
+			//Reset white
+		}
+		else if (wParam == VK_SPACE) { // Press the 'R' Key
+			r = 1;
 			g = 1;
 			b = 1;
-			//Reset ehite
 		}
 		break;
 
@@ -116,13 +133,13 @@ void p2Demo() {
 void p2q1() {
 	glClearColor(0, 0, 0, 0);
 	glClear(GL_COLOR_BUFFER_BIT);
-	if (rand() % 2) {
+	/*if (rand() % 2) {
 		r -= 0.00001;
 	}
 	else {
 		r += 0.001;
 	}
-	g -= 0.001;
+	g -= 0.001;*/
 	glLoadIdentity(); // Remove all transformation
 	glTranslatef(tx, ty, 0);//Translate x and y, tx & ty are global variables
 	glBegin(GL_QUADS); //quads
